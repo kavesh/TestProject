@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<property name="FILE_ERROR" value="ERROR"/>
+	<property name="FILE_TRACE" value="TRACE"/>
+	<property name="FILE_INFO"  value="INFO"/>
+	<property name="FILE_DEBUG" value="DEBUG"/>
+    
+        <appender name="FILE-ERROR"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+		         <level>ERROR</level>
+		         <onMatch>ACCEPT</onMatch>
+		         <onMismatch>DENY</onMismatch>
+		    </filter>
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <file>${LOG_PATH}/${FILE_ERROR}/Routing_App_Error.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${FILE_ERROR}/Routing_App_Error.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        
+        <appender name="FILE-DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${LOG_PATH}/${FILE_DEBUG}/Routing_App_Debug.log</file>
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+		         <level>DEBUG</level>
+		         <onMatch>ACCEPT</onMatch>
+		         <onMismatch>DENY</onMismatch>
+		    </filter>
+			<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			</encoder>
+		
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- rollover daily -->
+				<fileNamePattern>${LOG_PATH}/${FILE_DEBUG}/Routing_App_Debug.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+				<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		     			<maxFileSize>10MB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+		</appender>
+
+		<appender name="FILE-TRACE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${LOG_PATH}/${FILE_TRACE}/Routing_App_Trace.log</file>
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+		         <level>TRACE</level>
+		         <onMatch>ACCEPT</onMatch>
+		         <onMismatch>DENY</onMismatch>
+		    </filter>
+			<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			</encoder>
+		
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- rollover daily -->
+				<fileNamePattern>${LOG_PATH}/${FILE_TRACE}/Routing_App_Trace.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+				<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		     			<maxFileSize>10MB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+		</appender>
+		
+		<appender name="FILE-INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${LOG_PATH}/${FILE_INFO}/Routing_App_Info.log</file>
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+		         <level>INFO</level>
+		         <onMatch>ACCEPT</onMatch>
+		         <onMismatch>DENY</onMismatch>
+		    </filter>
+			<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			</encoder>
+		
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- rollover daily -->
+				<fileNamePattern>${LOG_PATH}/${FILE_INFO}/Routing_App_Info.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+				<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		     			<maxFileSize>10MB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+		</appender>
+		
+        <root level="DEBUG">
+            <appender-ref ref="FILE-INFO"/>
+            <appender-ref ref="FILE-TRACE"/>
+            <appender-ref ref="FILE-DEBUG"/>
+            <appender-ref ref="FILE-ERROR"/>
+        </root>
+
+</configuration>
